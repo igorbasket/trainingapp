@@ -38,7 +38,7 @@ class UserService {
 
     Optional<UserDTO> addUser(NewUserDTO user){
         def val=userByEmail(user.email)
-        if (!val.isPresent()) {
+        if (val.isPresent()) {
             log.info "Optional is empty"
             return  Optional.empty()
         }

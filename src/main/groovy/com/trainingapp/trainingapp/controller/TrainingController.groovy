@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping('/api/training')
 class TrainingController {
 
-    @Autowired TrainingService trainingService
-    @GetMapping('/userID_{id}')
-    List<Training> getAllTrainnigByUser (@PathVariable('id') Integer id){
-        trainingService
-                        .trainingByUser(id)
-
-
-    }
+//    @Autowired TrainingService trainingService
+//    @GetMapping('/userID_{id}')
+//    List<Training> getAllTrainnigByUser (@PathVariable('id') Integer id){
+//        trainingService
+//                        .trainingByUser(id)
+//
+//
+//    }
 
 }
