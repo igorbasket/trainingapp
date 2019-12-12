@@ -13,8 +13,8 @@ class TrainingService {
 
     @Autowired TrainingRepository trainingRepository
 
-    List<Training> trainingByUser(Integer id) {
-        trainingRepository
-                .findAll(id)
-    }
+//    List<Training> trainingByUser(Integer id) {
+//        trainingRepository
+//                .findAll(id)
+//    }
 }
