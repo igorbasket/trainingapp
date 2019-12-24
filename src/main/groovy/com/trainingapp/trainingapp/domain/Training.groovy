@@ -22,5 +22,4 @@ class Training {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = 'training')
     List<Exercise> exercise = []
 
-
 }
