@@ -18,7 +18,7 @@ class UserService {
      List<UserDTO> getUsers() {
         userRepository
                 .findAll()
-                .collect{it-> new UserDTO(name:it.name, email:it.email, age:it.age, weight:it.weight)}
+                .collect{ new UserDTO(name:it.name, email:it.email, age:it.age, weight:it.weight)}
     }
 
 

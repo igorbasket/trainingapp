@@ -20,6 +20,6 @@ class Training {
     User user
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = 'training')
-    List<Exercise> exercise = []
+    List<Exercise> exercise = [] //List l=[]  l+=5  l.add(5) l=l+[5] l.addAll(l1) l.add([2,'dfdfd',4])
 
 }

@@ -1,6 +1,7 @@
 package com.trainingapp.trainingapp.service
 
 import com.trainingapp.trainingapp.domain.Training
+import com.trainingapp.trainingapp.model.TrainingDTO
 import com.trainingapp.trainingapp.model.UserDTO
 import com.trainingapp.trainingapp.repository.TrainingRepository
 import groovy.util.logging.Slf4j
@@ -13,8 +14,9 @@ class TrainingService {
 
     @Autowired TrainingRepository trainingRepository
 
-//    List<Training> trainingByUser(Integer id) {
-//        trainingRepository
-//                .findAll(id)
-//    }
+    List<TrainingDTO> trainingByUser(String name) {
+        trainingRepository
+                .findByUserName(name)
+                .collect{ new TrainingDTO(name:it.name, trainingDuration:it.trainingDuration)}
+    }
 }
