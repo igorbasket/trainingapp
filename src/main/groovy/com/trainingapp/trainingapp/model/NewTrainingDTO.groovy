@@ -6,6 +6,9 @@ class NewTrainingDTO {
 
     String name
 
+    String email
+
+    List<ExerciseDTO> listExerciseDto
 
 
 

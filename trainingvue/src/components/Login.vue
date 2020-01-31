@@ -1,6 +1,6 @@
 <template>
     <div align="center">
-        <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="120px"  class="demo-dynamic" style="width: 30%">
+        <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" class="demo-dynamic" style="width: 300px">
             <el-form-item
                     prop="email"
                     label="Email"
@@ -50,6 +50,7 @@
                         alert('submit!');
                     } else {
                         alert('error submit!!');
+                        this.$router.push('/user_page')  // НУЖНО БУДЕТ УДАЛИТЬ))
                         return false;
                     }
                 });

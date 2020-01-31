@@ -19,9 +19,11 @@ class Exercise {
 
     String description
 
+//    String linkVideo
+
     BigInteger time
 
-    ExerciseType exerciseType
+//    ExerciseType exerciseType
 
     @ManyToOne
     Training training

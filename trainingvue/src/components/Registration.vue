@@ -2,23 +2,23 @@
     <div align="center">
         <i style="font-size: large">Registration</i>
         <h1></h1>
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm" style="width: 30%" align="center">
-        <el-form-item label="Your name" prop="name">
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm" style="width: 300px" align="center">
+        <el-form-item label="Name" prop="name">
             <el-input type="name" v-model="ruleForm.name" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Your email" prop="email">
+        <el-form-item label="Email" prop="email">
             <el-input type="email" v-model="ruleForm.email" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="Password" prop="password">
             <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="Confirm" prop="checkPass">
+        <el-form-item label="Confirm password" prop="checkPass">
             <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="Age" prop="age">
             <el-input v-model.number="ruleForm.age"></el-input>
         </el-form-item>
-        <el-form-item label="Your weight" prop="weight">
+        <el-form-item label="Weight" prop="weight">
             <el-input type="weight" v-model="ruleForm.weight" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
@@ -34,7 +34,7 @@
         name: "Registration",
         data() {
 
-            var checkAge = (rule, value, callback) => {
+            let checkAge = (rule, value, callback) => {
                 if (!value) {
                     return callback(new Error('Please input the age'));
                 }
@@ -50,7 +50,7 @@
                     }
                 }, 1000);
             };
-            var validatePass = (rule, value, callback) => {
+            let validatePass = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('Please input the password'));
                 } else {
@@ -60,7 +60,7 @@
                     callback();
                 }
             };
-            var validatePass2 = (rule, value, callback) => {
+            let validatePass2 = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('Please input the password again'));
                 } else if (value !== this.ruleForm.password) {
@@ -100,7 +100,8 @@
                     weight: this.ruleForm.weight
                 }).then(response => {
                     let a = response.data;
-                    alert(a)
+                    alert(a);
+                    this.$router.push('/')
                 })
             },
             resetForm(formName) {

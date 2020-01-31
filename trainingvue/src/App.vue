@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/man.png" width="200px" height="200px">
+    <img alt="Vue logo" src="./assets/man.png" width="100px" height="100px">
     <!--    <img alt="Vue logo" src="./assets/logo.png">-->
     <!--    <UsersList msg="My Training APP"/>-->
-    <h1>My-TrainingAPP</h1>
+    <h1>My-Training</h1>
     <hr>
 <!--    <router-link to="/">Home</router-link> <router-link to="/users">UsersList</router-link> -->
     <h1></h1>
