@@ -2,6 +2,7 @@ package com.trainingapp.trainingapp.service
 
 import com.trainingapp.trainingapp.domain.Exercise
 import com.trainingapp.trainingapp.domain.Training
+import com.trainingapp.trainingapp.model.ExerciseDTO
 import com.trainingapp.trainingapp.model.NewTrainingDTO
 import com.trainingapp.trainingapp.model.TrainingDTO
 import com.trainingapp.trainingapp.model.UserDTO
@@ -46,13 +47,44 @@ class TrainingService {
                                                         data: LocalDateTime.now(),
                                                         trainingDuration: sum,
                                                         user: userRepository.findUserByEmail(newTraining.email)))
-        val.exercise = newTraining
-                                    .listExerciseDto
-                                    .collect{it -> exerciseRepository.save(new Exercise(name: it.name,
-                                                                                        description: it.description,
-                                                                                        time: it.time,
-                                                                                        training: val))}
+        val.exercise=newTraining
+                .listExerciseDto
+                .collect{it -> exerciseRepository.save(new Exercise(name: it.name,
+                                                                            description: it.description,
+                                                                            time: it.time,
+                                                                            training: val))}
+
 
         Optional.of(newTraining)
+    }
+
+    List<ExerciseDTO> trainingByName(String name) {
+        exerciseRepository
+                .findByTrainingName(name)
+                .collect{ new ExerciseDTO(name:it.name,
+                        description: it.description,
+                        time: it.time)}
+    }
+
+//    Optional<NewTrainingDTO> addOrCreateTraining(NewTrainingDTO newTrainingDTO) {
+//        def val = trainingRepository.findByTrainingName(newTrainingDTO.name)
+//        if (val.ifPresent()) {
+//            def var = val.get()
+//
+//
+//            log.info "Training not found"
+//            addTraining(newTrainingDTO)
+//        } // удаляем упражнения и записываем новые
+//
+//
+//        Optional.of(newTrainingDTO)
+//    }
+
+    Optional<String> nameTraining(String name) {
+        trainingRepository
+                .findByName(name)
+                .map{Optional.of(it.name)}
+                .orElse(Optional.empty())
+
     }
 }

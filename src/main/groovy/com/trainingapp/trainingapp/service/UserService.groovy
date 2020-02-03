@@ -53,5 +53,14 @@ class UserService {
                                 age:val.age,
                                 weight:val.weight))
     }
+   void deleteUser(String email) {
+        def userForDel = userRepository
+                .findByEmail(email)
+       if(userForDel.ifPresent()){
+           userRepository.delete(userForDel.get())
+       }
+
+    }
+
 
 }

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -35,6 +36,18 @@ class TrainingController {
                 .trainingByEmail(email)
     }
 
+    @GetMapping('/{nameTraining}/')
+    List<ExerciseDTO> getTrainingByName (@PathVariable('nameTraining') String name){
+        trainingService
+                .trainingByName(name)
+    }
+//
+//    @GetMapping('/searchName/{nameTraining}/')
+//    String getTrainingName (@PathVariable('nameTraining') String name){
+//        trainingService
+//                .nameTraining(name)
+//    }
+
     @PostMapping('/newTraining')
     ResponseEntity<NewTrainingDTO> newTraining(@RequestBody NewTrainingDTO training){
         trainingService
@@ -43,7 +56,24 @@ class TrainingController {
                 .orElse(ResponseEntity.notFound().build())
 
     }
+//    @PutMapping('/{nameTraining}/')
+//    ResponseEntity<NewTrainingDTO> createOrUpdTraining(@PathVariable('nameTraining') @RequestBody NewTrainingDTO training){
+//        trainingService
+//                .addOrCreateTraining(training)
+//                .map{ResponseEntity.ok(it)}
+//                .orElse(ResponseEntity.notFound().build())
+//    }
 
 
-//    @GetMapping('/email/{email}/')
+
+
+//    @PutMapping("{id}")
+//    def changeMess(@PathVariable String id,@RequestBody String str){
+//        def value = mess.find{it.id == id}
+//        if (value){
+//            mess.remove(value)
+//        }
+//        mess.add([id: id, text: str])
+//        mess.sort{it.id}
+//    }
 }
