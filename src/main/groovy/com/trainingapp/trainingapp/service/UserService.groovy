@@ -3,6 +3,7 @@ package com.trainingapp.trainingapp.service
 import com.trainingapp.trainingapp.domain.User
 import com.trainingapp.trainingapp.model.NewUserDTO
 import com.trainingapp.trainingapp.model.UserDTO
+import com.trainingapp.trainingapp.repository.TrainingRepository
 import com.trainingapp.trainingapp.repository.UserRepository
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,9 +14,10 @@ import org.springframework.stereotype.Service
 @Slf4j
 class UserService {
 
-@Autowired UserRepository userRepository
+    @Autowired UserRepository userRepository
+    @Autowired TrainingService trainingService
 
-     List<UserDTO> getUsers() {
+    List<UserDTO> getUsers() {
         userRepository
                 .findAll()
                 .collect{ new UserDTO(name:it.name, email:it.email, age:it.age, weight:it.weight)}
@@ -24,16 +26,16 @@ class UserService {
 
     Optional<UserDTO> userByEmail(String email) {
         userRepository
-                    .findByEmail(email)
-                    .map {Optional.of(new UserDTO(name:it.name, email:it.email, age:it.age, weight:it.weight))}
-                    .orElse(Optional.empty())
+                .findByEmail(email)
+                .map {Optional.of(new UserDTO(name:it.name, email:it.email, age:it.age, weight:it.weight))}
+                .orElse(Optional.empty())
     }
 
     Optional<UserDTO> userByName(String name) {
         userRepository
-                    .findByName(name)
-                    .map{Optional.of(new UserDTO(name:it.name, email:it.email, age:it.age, weight:it.weight))}
-                    .orElse(Optional.empty())
+                .findByName(name)
+                .map{Optional.of(new UserDTO(name:it.name, email:it.email, age:it.age, weight:it.weight))}
+                .orElse(Optional.empty())
     }
 
     Optional<UserDTO> addUser(NewUserDTO user){
@@ -43,22 +45,24 @@ class UserService {
             return  Optional.empty()
         }
         val=userRepository.save(new User(name:user.name,
-                                    email:user.email,
-                                    password:user.password,
-                                    age:user.age,
-                                    weight:user.weight))
+                email:user.email,
+                password:user.password,
+                age:user.age,
+                weight:user.weight))
 
         Optional.of(new UserDTO(name:val.name,
-                                email:val.email,
-                                age:val.age,
-                                weight:val.weight))
+                email:val.email,
+                age:val.age,
+                weight:val.weight))
     }
-   void deleteUser(String email) {
+
+    void deleteUser(String email) {
         def userForDel = userRepository
                 .findByEmail(email)
-       if(userForDel.ifPresent()){
-           userRepository.delete(userForDel.get())
-       }
+        if(userForDel.isPresent()){
+            trainingService.deleteTraining(userForDel.get().email)
+            userRepository.delete(userForDel.get())
+        }
 
     }
 
